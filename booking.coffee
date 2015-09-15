@@ -30,7 +30,7 @@ casper.Waiter = ->
   if not @.exists 'tr.virginRowStyle, tr.virginAltRowStyle'
     @.wait 3000, ->
       @.echo "#{loopcnt++}: Wait 3s", "INFO"
-      if test_flag
+      if test_flag?
         @.click '#phContentTop_lbDate_7'
         @.waitForSelector '#phContentTop_lbDate_7.dateActive'
       else
@@ -95,7 +95,7 @@ casper.then ->
   @.waitForSelector '#bookingSheet'
 
 casper.then ->
-  if test_flag
+  if test_flag?
     @.click '#phContentTop_lbDate_7'
     @.waitForSelector '#phContentTop_lbDate_7.dateActive'
   else
