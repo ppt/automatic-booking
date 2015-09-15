@@ -7,10 +7,9 @@ casper = require("casper").create
 util = require "utils"
 moment = require 'moment'
 
-# nosleep = true
+# test_flag = true
 maxloop = 400
 loopcnt = 0
-found_flag = false
 
 # get param
 user = casper.cli.get("user")
@@ -19,16 +18,20 @@ password_db =
 password = password_db[user]
 class_time = casper.cli.get("class-time")
 class_name = casper.cli.get("class-name")
-# scan_time = "21:58:00"
-scan_time = "12:00:00"
+scan_time = "21:58:00"
+# scan_time = "12:00:00"
 casper.echo "#{scan_time} #{user}:#{password} #{class_time} #{class_name}", "INFO"
 
 casper.Waiter = ->
   if not @.exists 'tr.virginRowStyle, tr.virginAltRowStyle'
     @.wait 3000, ->
       @.echo "#{loopcnt++}: Wait 3s", "INFO"
-      @.click '#phContentTop_lbDate_8'
-      @.waitForSelector '#phContentTop_lbDate_8.dateActive'
+      if test_flag
+        @.click '#phContentTop_lbDate_7'
+        @.waitForSelector '#phContentTop_lbDate_7.dateActive'
+      else
+        @.click '#phContentTop_lbDate_8'
+        @.waitForSelector '#phContentTop_lbDate_8.dateActive'
   else
     @.echo 'open', 'INFO'
     selector = 'tr.virginRowStyle, tr.virginAltRowStyle'
@@ -68,7 +71,7 @@ sleep_time = parseInt end_time.diff(now,'milliseconds')
 casper.start "http://www.yahoo.com"
 casper.then ->
   @.echo "Sleep #{sleep_time}",'INFO'
-  @.wait sleep_time if not nosleep? and sleep_time > 0
+  @.wait sleep_time if not test_flag? and sleep_time > 0
 casper.then ->
   @.echo "#{moment().format('HH:mm:ss')} Start", "INFO"
 
@@ -88,13 +91,13 @@ casper.then ->
   @.waitForSelector '#bookingSheet'
 
 casper.then ->
-  # @.click '#phContentTop_lbDate_8'
-  @.click '#phContentTop_lbDate_7'
-  # @.waitForSelector '#phContentTop_lbDate_8.dateActive'
-  @.waitForSelector '#phContentTop_lbDate_7.dateActive'
+  if test_flag
+    @.click '#phContentTop_lbDate_7'
+    @.waitForSelector '#phContentTop_lbDate_7.dateActive'
+  else
+    @.click '#phContentTop_lbDate_8'
+    @.waitForSelector '#phContentTop_lbDate_8.dateActive'
   @.echo 'Click Last Date', 'INFO'
-  # @.click '#phContentTop_lbDate_7'
-  # @.waitForSelector '#phContentTop_lbDate_7.dateActive'
 
 # loop until booking
 casper.then ->
