@@ -7,7 +7,8 @@ casper = require("casper").create
 util = require "utils"
 moment = require 'moment'
 
-# test_flag = true
+if casper.cli.has('test-flag')
+  test_flag = true
 maxloop = 400
 loopcnt = 0
 
