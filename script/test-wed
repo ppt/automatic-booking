@@ -1,0 +1,1 @@
+casperjs --web-security=false --ignore-ssl-errors=true --ssl-protocol=any --user=20009324 --password=0625 --class-time="6:30am" --class-name="Body Pump" --test-flag booking.coffee
