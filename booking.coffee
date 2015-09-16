@@ -9,7 +9,7 @@ moment = require 'moment'
 
 if casper.cli.has('test-flag')
   test_flag = true
-maxloop = 400
+maxloop = 12000
 loopcnt = 0
 
 # get param
@@ -23,7 +23,7 @@ casper.echo "#{scan_time} #{user}:#{password} #{class_time} #{class_name}", "INF
 
 casper.Waiter = ->
   if not @.exists 'tr.virginRowStyle, tr.virginAltRowStyle'
-    @.wait 3000, ->
+    @.wait 100, ->
       @.echo "#{loopcnt++}: Wait 3s", "INFO"
       if test_flag?
         @.click '#phContentTop_lbDate_7'
