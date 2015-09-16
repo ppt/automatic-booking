@@ -13,19 +13,10 @@ maxloop = 400
 loopcnt = 0
 
 # get param
-user = casper.cli.get("user")
-password_db =
-  '20009324' : '0625'
-  '20009326' : '2222'
-  '20015107' : '0625'
-  '20005894' : '1961'
-  '20005192' : '2269'
-  '20005416' : '1425'
-  '20012642' : '1855'
-  '20017976' : '1813'
-password = password_db[user]
-class_time = casper.cli.get("class-time")
-class_name = casper.cli.get("class-name")
+user = casper.cli.raw.get("user")
+password = casper.cli.raw.get('password')
+class_time = casper.cli.raw.get("class-time")
+class_name = casper.cli.raw.get("class-name")
 scan_time = "21:58:00"
 # scan_time = "12:00:00"
 casper.echo "#{scan_time} #{user}:#{password} #{class_time} #{class_name}", "INFO"
