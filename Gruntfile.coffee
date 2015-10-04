@@ -8,9 +8,6 @@ module.exports = (grunt) ->
     pkg: grunt.file.readJSON("package.json")
     exec:
       casper: 'casperjs --web-security=false --ignore-ssl-errors=true --ssl-protocol=any --user=20009324 --class-time="6:30am" --class-name="Stretching" booking.coffee'
-      # casper: 'casperjs --web-security=false --ignore-ssl-errors=true --ssl-protocol=any virgin.coffee'
-      # casper: 'casperjs --web-security=false --ignore-ssl-errors=true --ssl-protocol=any test virgin.coffee'
-      # casper: 'casperjs --web-security=false --ignore-ssl-errors=true --ssl-protocol=any test test-all.coffee'
     watch:
       exec:
         files: ['**/*.coffee']

@@ -1,6 +1,7 @@
 casper = require("casper").create
   verbose: true
   logLevel: 'error'
+  waitTimeout: 120000
   pageSettings:
     userAgent: 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
 
@@ -32,10 +33,10 @@ casper.Waiter = ->
         @.click '#phContentTop_lbDate_8'
         @.waitForSelector '#phContentTop_lbDate_8.dateActive'
   else
-    @.echo 'open', 'INFO'
+    @.echo "#{moment().format('HH:mm:ss')} Open", "INFO"
     selector = 'tr.virginRowStyle, tr.virginAltRowStyle'
     rows = this.getElementsInfo(selector)
-    @.echo "After getElement #{rows.length}", 'INFO'
+    @.echo "#{moment().format('HH:mm:ss')} After getElement #{rows.length}", 'INFO'
     for row,i in rows
       # @.echo "#{i} ---------------", 'ERROR'
       # @.echo util.dump rows[i].html
@@ -51,11 +52,13 @@ casper.Waiter = ->
       if t[0].toLowerCase() == class_time.toLowerCase() and t[3].toLowerCase() == class_name.toLowerCase()
         id = idtext[1]
         break
-    @.echo "Click Booking", 'INFO'
+    @.echo "#{moment().format('HH:mm:ss')} Click Booking", 'INFO'
     @.click "a[href='classdetail.aspx?id=#{id}']"
     @.waitForSelector 'a#btnNextStep.virginButtonGreen', ->
+        @.echo "#{moment().format('HH:mm:ss')} Click Next Step", 'INFO'
         @.click "a#btnNextStep"
         @.waitForSelector 'a#phContentBottom_btnBookAnother', ->
+          @.echo "#{moment().format('HH:mm:ss')} Finish", 'INFO'
           @.exit()
 
   true
@@ -77,16 +80,16 @@ casper.then ->
 # begin
 casper.thenOpen "http://mylocker.virginactive.co.th/www/login.aspx"
 casper.then ->
-  @.echo "Login #{user}:#{password}",'INFO'
+  @.echo "#{moment().format('HH:mm:ss')} Login #{user}:#{password}",'INFO'
   @.sendKeys('input#phContentBottom_txtMemberID', "#{user}")
   @.sendKeys('input#phContentBottom_txtPassword', password)
   @.click '#phContentBottom_btnLogin'
-  @.echo 'Click Login', 'INFO'
+  @.echo "#{moment().format('HH:mm:ss')} Click Login", 'INFO'
   @.waitForSelector '#phNavBar_MainNavigation1_hlClass'
 
 casper.then ->
   @.click '#phNavBar_MainNavigation1_hlClass'
-  @.echo 'Click Book Class', 'INFO'
+  @.echo "#{moment().format('HH:mm:ss')} Click Book Class", 'INFO'
   @.waitForSelector '#bookingSheet'
 
 casper.then ->
@@ -96,7 +99,7 @@ casper.then ->
   else
     @.click '#phContentTop_lbDate_8'
     @.waitForSelector '#phContentTop_lbDate_8.dateActive'
-  @.echo 'Click Last Date', 'INFO'
+  @.echo "#{moment().format('HH:mm:ss')} Click Last Date", 'INFO'
 
 # loop until booking
 casper.then ->
