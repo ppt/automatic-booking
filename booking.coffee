@@ -72,7 +72,7 @@ sleep_time = parseInt end_time.diff(now,'milliseconds')
 
 casper.start "http://www.yahoo.com"
 casper.then ->
-  @.echo "Sleep #{sleep_time}",'INFO'
+  @.echo "#{moment().format('HH:mm:ss')} Sleep #{sleep_time}",'INFO'
   @.wait sleep_time if not test_flag? and sleep_time > 0
 casper.then ->
   @.echo "#{moment().format('HH:mm:ss')} Start", "INFO"
