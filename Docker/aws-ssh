@@ -1,0 +1,1 @@
+ssh -i casperjs.pem ec2-user@ec2-54-179-155-88.ap-southeast-1.compute.amazonaws.com
