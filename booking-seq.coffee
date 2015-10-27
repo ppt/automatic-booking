@@ -10,7 +10,7 @@ moment = require 'moment'
 
 if casper.cli.has('test-flag')
   test_flag = true
-maxloop = 12000
+maxloop = 1200
 loopcnt = 0
 
 # get param
@@ -19,14 +19,14 @@ password = casper.cli.raw.get('password')
 class_time = casper.cli.raw.get("class-time")
 class_name = casper.cli.raw.get("class-name")
 class_seq = casper.cli.get("seq")
-scan_time = "21:58:00"
+scan_time = "22:00:00"
 # scan_time = "12:00:00"
 casper.echo "#{scan_time} #{user}:#{password} #{class_name} #{class_seq}", "INFO"
 
 casper.Waiter = ->
   if not @.exists 'tr.virginRowStyle, tr.virginAltRowStyle'
-    @.wait 100, ->
-      @.echo "#{loopcnt++}: Wait 3s", "INFO"
+    @.wait 1000, ->
+      @.echo "#{loopcnt++}: Wait 1s", "INFO"
       if test_flag?
         @.click '#phContentTop_lbDate_7'
         @.waitForSelector '#phContentTop_lbDate_7.dateActive'
