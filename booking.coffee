@@ -49,7 +49,7 @@ casper.Waiter = ->
       # 0:time,3:class,5:instructor
       idtext = row.html.match /classdetail\.aspx\?id\=([^\"]*)/
       # @.echo "#{t[0]}, #{t[3]}, #{t[5]}, #{idtext[1]}"
-      if t[0].toLowerCase() == class_time.toLowerCase() and t[3].toLowerCase() == class_name.toLowerCase()
+      if t[0].toLowerCase() == class_time.toLowerCase() and t[3].toLowerCase().indexOf(class_name.toLowerCase()) >= 0
         id = idtext[1]
         break
     @.echo "#{moment().format('HH:mm:ss')} Click Booking", 'INFO'

@@ -1,1 +1,0 @@
-scp -i casperjs.pem -r $1 ec2-user@ppt-aws.ddns.net:~

@@ -1,1 +1,0 @@
-ssh -i casperjs.pem ec2-user@ppt-aws.ddns.net

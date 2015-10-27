@@ -50,7 +50,7 @@ casper.Waiter = ->
       # 0:time,3:class,5:instructor
       idtext = row.html.match /classdetail\.aspx\?id\=([^\"]*)/
       # @.echo "#{t[0]}, #{t[3]}, #{t[5]}, #{idtext[1]}"
-      if t[3].toLowerCase() == class_name.toLowerCase()
+      if t[3].toLowerCase().indexOf(class_name.toLowerCase()) >= 0
         @.echo "#{class_seq}: #{t[0]}, #{t[3]}, #{t[5]}", 'INFO'
         if class_seq == 1
           id = idtext[1]
