@@ -1,0 +1,2 @@
+cp ../booking*.coffee .
+docker build -t phan/booking .
