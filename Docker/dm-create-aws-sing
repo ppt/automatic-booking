@@ -1,0 +1,2 @@
+docker-machine create --driver amazonec2 --amazonec2-access-key AKIAIKRFCEFXUU6YYRVQ --amazonec2-secret-key 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 --amazonec2-vpc-id vpc-bd874fd8 --amazonec2-region ap-southeast-1 $1
+eval $(docker-machine env $1)
